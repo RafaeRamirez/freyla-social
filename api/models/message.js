@@ -1,9 +1,12 @@
-'use strict'
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 
-var MessageSchema = Schema({ 
+
+'use strict';
+
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const MessageSchema = new Schema({
     text: String,
     viewed: String,
     created_at: String,

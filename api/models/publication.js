@@ -1,10 +1,13 @@
-'use strict'
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 
-var PublicationSchema = Schema({ 
 
+
+'use strict';
+
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const PublicationSchema = new Schema({
     text: String,
     file: String,
     created_at: String,

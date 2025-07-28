@@ -1,18 +1,22 @@
+
+
+
+
+
+
+
+
 'use strict';
 
 const express = require('express');
 const UserController = require('../controllers/user');
 const md_auth = require('../middlewares/authenticated');
+const multer = require('multer');
 const fs = require('fs');
-const cors = require('cors');
 const path = require('path');
 const crypto = require('crypto');
-const multer = require('multer');
 
-const User = require('../models/user');
 const api = express.Router();
-
-api.use(cors());
 
 // Configuración de almacenamiento para multer
 const storage = multer.diskStorage({
@@ -24,9 +28,7 @@ const storage = multer.diskStorage({
     cb(null, uploadPath);
   },
   filename(req, file, cb) {
-    // Obtener la extensión del archivo en minúsculas
     const fileExtension = path.extname(file.originalname).toLowerCase();
-    // Generar un nombre único utilizando crypto.randomBytes y la fecha actual
     crypto.randomBytes(16, (err, raw) => {
       if (err) return cb(err);
       const filename = raw.toString('hex') + Date.now() + fileExtension;
@@ -35,7 +37,6 @@ const storage = multer.diskStorage({
   }
 });
 
-// Configuración de multer usando el storage definido
 const upload = multer({ storage });
 
 api.get('/home', UserController.home);

@@ -1,21 +1,30 @@
-'use strict'
 
-var jwt = require('jwt-simple');
-var moment = require('moment');
-var secret = 'clave_secreta_curso_Freyla_angular';
 
-exports.ensureAuth = function(req, res, next){
+
+
+
+
+
+
+
+'use strict';
+
+const jwt = require('jwt-simple');
+const moment = require('moment');
+const secret = 'clave_secreta_curso_Freyla_angular';
+
+exports.ensureAuth = function(req, res, next) {
     // Verificar que existe la cabecera de autorización
-    if(!req.headers.authorization){
-        return res.status(403).send({message: 'La petición no tiene la cabecera de autenticación'});
+    if (!req.headers.authorization) {
+        return res.status(403).send({ message: 'La petición no tiene la cabecera de autenticación' });
     }
 
     // Obtener el token y eliminar comillas si es necesario
-    var token = req.headers.authorization.replace(/['"]+/g, '');
+    const token = req.headers.authorization.replace(/['"]+/g, '');
 
     try {
         // Intentamos decodificar el token
-        var payload = jwt.decode(token, secret);
+        const payload = jwt.decode(token, secret);
 
         // Comprobamos si el token ha expirado
         if (payload.exp <= moment().unix()) {
@@ -36,4 +45,4 @@ exports.ensureAuth = function(req, res, next){
             message: 'El token no es válido o ha sido alterado'
         });
     }
-}
+};
