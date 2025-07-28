@@ -8,7 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 images-debug.log*
 # Dependency directories
-
+proyecto-angular*
 # Build directories
 node_modules
 dist
